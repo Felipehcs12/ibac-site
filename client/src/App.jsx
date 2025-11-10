@@ -54,7 +54,7 @@ export default function App() {
           <Route
             path="/membros"
             element={
-              <RequireAuth roles={["admin"]}>
+              <RequireAuth roles={["admin", "volunteer"]}>
                 <MembersList />
               </RequireAuth>
             }
@@ -62,7 +62,7 @@ export default function App() {
           <Route
             path="/membros/novo"
             element={
-              <RequireAuth roles={["admin"]}>
+              <RequireAuth roles={["admin", "volunteer"]}>
                 <MemberForm />
               </RequireAuth>
             }
@@ -70,12 +70,19 @@ export default function App() {
           <Route
             path="/membros/:id"
             element={
-              <RequireAuth roles={["admin"]}>
+              <RequireAuth roles={["admin", "volunteer"]}>
                 <MemberView />
               </RequireAuth>
             }
           />
-
+          <Route
+            path="/membros/:id/editar"
+            element={
+              <RequireAuth roles={["admin", "volunteer"]}>
+                <MemberForm />
+              </RequireAuth>
+            }
+          />
           {/* 404 */}
           <Route path="*" element={<div className="p-6">Página não encontrada</div>} />
         </Route>

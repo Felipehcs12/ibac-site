@@ -89,12 +89,23 @@ export default function Layout() {
     [location.pathname]
   );
 
-  /** Botão “Intranet” na Home */
-  const intranetButtonHref = user ? "/membros" : "/login";
+  /** Botão “Intranet” na Home 
+const intranetButtonHref = user ? "/dashboard" : "/login";
 
   /** Ação do botão “Intranet” na Home */
   const handleIntranetClick = () => {
-    navigate(intranetButtonHref);
+    /*navigate(intranetButtonHref);*/
+     setOpen(false);
+
+    if (user) {
+      navigate("/dashboard");
+      return;
+    }
+
+    navigate("/login", {
+      state: { from: { pathname: "/dashboard" } },
+      replace: false,
+    });
   };
 
   return (
